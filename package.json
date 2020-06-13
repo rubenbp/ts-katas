@@ -6,7 +6,9 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "test": "jest",
-    "test:watch": "jest --watchAll"
+    "posttest": "npm run format",
+    "test:watch": "jest --watchAll",
+    "format": "prettier --loglevel warn --write \"**/*.{ts,tsx,js}\""
   },
   "keywords": [],
   "author": "Rubén Bernárdez",
@@ -17,5 +19,18 @@
     "ts-jest": "^26.1.0",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.5"
+  },
+  "devDependencies": {
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.10",
+    "prettier": "2.0.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js}": "prettier --write"
   }
 }
