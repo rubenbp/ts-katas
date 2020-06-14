@@ -6,10 +6,10 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "pretest": "npm run lint",
-    "test": "jest",
-    "test:watch": "jest --watchAll",
-    "format": "prettier --loglevel warn --write \"**/*.{ts,tsx,js}\"",
-    "lint": "eslint '*/**/*.{js,ts,tsx}' --cache --fix"
+    "test": "jest --watchAll",
+    "test:ci": "jest",
+    "format": "prettier --write \"**/*.{ts,tsx,js}\"",
+    "lint": "eslint '*/**/*.{js,ts,tsx}' --cache"
   },
   "keywords": [],
   "author": "Rubén Bernárdez",
@@ -33,13 +33,13 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "npm run test"
+      "pre-push": "npm run lint && npm run test:ci"
     }
   },
   "lint-staged": {
     "*.{ts,tsx,js}": [
       "prettier --write",
-      "eslint . --cache --fix",
+      "eslint --cache --fix",
       "git add"
     ]
   }
